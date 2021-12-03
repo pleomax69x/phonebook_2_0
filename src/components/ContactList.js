@@ -1,9 +1,14 @@
-const ContactList = (contacts) => {
+const ContactList = ({ visibleContacts, onDelete }) => {
   return (
     <div>
       <ul>
-        {contacts.map(({ id, name }) => (
-          <li key={id}>{name} </li>
+        {visibleContacts.map(({ id, name, number }) => (
+          <li key={id}>
+            {name}: {number}{" "}
+            <button type={"button"} onClick={() => onDelete(id)}>
+              Delete Contact
+            </button>{" "}
+          </li>
         ))}
       </ul>
     </div>
@@ -11,3 +16,14 @@ const ContactList = (contacts) => {
 };
 
 export default ContactList;
+
+// {
+//   visibleContacts.map(({ id, name, number }) => (
+//     <li key={id}>
+//       {name}: {number}
+//       <button type="button" onClick={() => deleteContact(id)}>
+//         Delete
+//       </button>
+//     </li>
+//   ));
+// }
