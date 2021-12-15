@@ -1,4 +1,11 @@
-const Filter = ({ filter, handleFilter }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { changeFilter } from "../redux/contactActions";
+import { getFilter } from "../redux/contactSelector";
+
+const Filter = () => {
+  const dispatch = useDispatch();
+  const value = useSelector(getFilter);
+
   return (
     <div>
       <p>Find contact by name</p>
@@ -7,8 +14,8 @@ const Filter = ({ filter, handleFilter }) => {
           type="text"
           name="filter"
           autoComplete="off"
-          value={filter}
-          onChange={handleFilter}
+          value={value}
+          onChange={(e) => dispatch(changeFilter(e.currentTarget.value))}
           placeholder="Enter name to find"
         />
       </label>

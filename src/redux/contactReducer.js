@@ -1,5 +1,10 @@
 import { combineReducers, createReducer } from "@reduxjs/toolkit";
-import { addContact, deleteContact, changeFilter } from "./contactActions";
+import {
+  addContact,
+  deleteContact,
+  changeFilter,
+  addContactLocal,
+} from "./contactActions";
 
 const initialState = [
   { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
@@ -12,6 +17,7 @@ const contacts = createReducer(initialState, {
   [addContact]: (state, action) => [...state, action.payload],
   [deleteContact]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
+  [addContactLocal]: (_, { payload }) => [...payload],
 });
 
 const filter = createReducer("", {
@@ -22,22 +28,3 @@ export default combineReducers({
   contacts,
   filter,
 });
-
-// const valueReducer = (state = 10, { type, payload }) => {
-//   switch (type) {
-//     case actionTypes.Inrement:
-//       return state + payload;
-
-//     case actionTypes.Decrement:
-//       return state - payload;
-
-//     default:
-//       break;
-//   }
-// };
-// const stepReducer = (state = 5, action) => state;
-
-// export default combineReducers({
-//     value: valueReducer,
-//     step: stepReducer
-// });
