@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ContactForm from "./ContactForm";
 import Filter from "./Filter";
 import ContactList from "./ContactList";
-import { nanoid } from "nanoid";
+// import { nanoid } from "nanoid";
 import { useDispatch, useSelector } from "react-redux";
 
 import { addContact } from "../redux/contactActions";
@@ -24,7 +24,7 @@ const Phonebook = () => {
   const [filter, setFilter] = useState("");
 
   const dispatch = useDispatch();
-  const contacts = useSelector((state) => state.contacts.contacts);
+  const contacts = useSelector((state) => state.phonebook.contacts);
 
   const handleFilter = (e) => setFilter(e.currentTarget.value);
 

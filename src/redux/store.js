@@ -7,7 +7,7 @@ import contactReducer from "./contactReducer";
 
 export const store = configureStore({
   reducer: {
-    contacts: contactReducer,
+    phonebook: contactReducer,
     //   counter: counterReducer,
   },
   middleware: [logger],
