@@ -1,10 +1,15 @@
 import { combineReducers, createReducer } from "@reduxjs/toolkit";
 import {
-  addContact,
-  deleteContact,
+  //   addContact,
+  //   deleteContact,
   changeFilter,
-  addContactLocal,
+  //   addContactLocal,
 } from "./contactActions";
+import {
+  fetchContacts,
+  fetchContactsPOST,
+  fetchContactsDELETE,
+} from "./contactOperation";
 
 const initialState = [
   { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
@@ -13,11 +18,16 @@ const initialState = [
   { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
 ];
 
-const contacts = createReducer(initialState, {
-  [addContact]: (state, action) => [...state, action.payload],
-  [deleteContact]: (state, { payload }) =>
-    state.filter(({ id }) => id !== payload),
-  [addContactLocal]: (_, { payload }) => [...payload],
+const contacts = createReducer([], {
+  [fetchContacts.fulfilled]: (_, action) => action.payload,
+  [fetchContactsPOST.fulfilled]: (state, action) => [...state, action.payload],
+
+  // [addContact]: (state, action) => [...state, action.payload],
+  // [deleteContact]: (state, { payload }) =>
+  // state.filter(({ id }) => id !== payload),
+  // [addContactLocal]: (_, { payload }) => [...payload],
+  [fetchContactsDELETE.fulfilled]: (state, { payload }) =>
+    state.filter(({ id }) => id !== payload.id),
 });
 
 const filter = createReducer("", {

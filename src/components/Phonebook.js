@@ -6,22 +6,24 @@ import ContactList from "./ContactList";
 import { useDispatch, useSelector } from "react-redux";
 import { addContactLocal } from "../redux/contactActions";
 import { getContacts } from "../redux/contactSelector";
+import { fetchContacts } from "../redux/contactOperation";
 
 const Phonebook = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
 
   useEffect(() => {
-    const webContacts = localStorage.getItem("contacts");
-    const parsedContacts = JSON.parse(webContacts);
-    if (parsedContacts) {
-      dispatch(addContactLocal(parsedContacts));
-    }
-  }, []);
+    // const webContacts = localStorage.getItem("contacts");
+    // const parsedContacts = JSON.parse(webContacts);
+    // if (parsedContacts) {
+    //   dispatch(addContactLocal(parsedContacts));
+    // }
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
-  useEffect(() => {
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-  }, [contacts]);
+  // useEffect(() => {
+  //   localStorage.setItem("contacts", JSON.stringify(contacts));
+  // }, [contacts]);
 
   return (
     <div>

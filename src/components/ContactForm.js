@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addContact } from "../redux/contactActions";
+import { fetchContactsPOST } from "../redux/contactOperation";
 import { getContacts } from "../redux/contactSelector";
 
 const ContactForm = () => {
@@ -29,8 +30,14 @@ const ContactForm = () => {
       alert(`${name} is alredy in contacts.`);
       return;
     }
+    const newContact = {
+      name,
+      number,
+      // createdAt: new Date().toISOString(),
+    };
+    dispatch(fetchContactsPOST(newContact));
+    // dispatch(addContact(name, number));
 
-    dispatch(addContact(name, number));
     setName("");
     setNumber("");
   };
