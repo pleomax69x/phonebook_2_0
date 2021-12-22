@@ -1,10 +1,11 @@
-import { combineReducers, createReducer, createSlice } from "@reduxjs/toolkit";
+import { createReducer } from "@reduxjs/toolkit";
 import authOperation from "./auth-operation";
 
 const initialState = {
   user: { name: null, email: null },
   token: null,
   isLogged: false,
+  loading: false,
 };
 
 const authReducer = createReducer(initialState, {
@@ -12,13 +13,29 @@ const authReducer = createReducer(initialState, {
     user: payload.user,
     token: payload.token,
     isLogged: true,
+    loading: false,
   }),
   [authOperation.login.fulfilled]: (state, { payload }) => ({
     user: payload.user,
     token: payload.token,
     isLogged: true,
+    loading: false,
   }),
   [authOperation.logout.fulfilled]: (state, action) => initialState,
+  [authOperation.fetchCurrentUser.fulfilled]: (state, { payload }) => ({
+    user: payload,
+    token: state.token,
+    isLogged: true,
+    loading: false,
+  }),
+  [authOperation.fetchCurrentUser.pending]: (state) => ({
+    ...state,
+    loading: true,
+  }),
+  [authOperation.fetchCurrentUser.rejected]: (state) => ({
+    ...state,
+    loading: false,
+  }),
 });
 
 // const authReducer = createReducer(initialState, {
