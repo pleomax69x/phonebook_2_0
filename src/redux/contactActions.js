@@ -13,5 +13,6 @@ export const addContact = createAction(
     };
   }
 );
+export const addContactLocal = createAction("phonebook/addConLocal");
 export const deleteContact = createAction("phonebook/deleteContact");
 export const changeFilter = createAction("phonebook/changeFilter");
